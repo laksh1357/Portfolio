@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakshya Singh | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            scroll-behavior: smooth;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(34, 211, 238, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .cyan-glow {
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.2);
+        }
+
+        .text-cyan { color: #22d3ee; }
+        .bg-cyan { background-color: #22d3ee; }
+        .border-cyan { border-color: #22d3ee; }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #444; }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed top-0 w-full z-50 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <span class="text-2xl font-extrabold tracking-tighter">Lakshya</span>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-gray-400">
+                <a href="#about" class="hover:text-cyan transition-colors">About</a>
+                <a href="#skills" class="hover:text-cyan transition-colors">Skills</a>
+                <a href="#projects" class="hover:text-cyan transition-colors">Projects</a>
+                <a href="#education" class="hover:text-cyan transition-colors">Education</a>
+                <a href="#achievements" class="hover:text-cyan transition-colors">Achievements</a>
+                <a href="#contact" class="hover:text-cyan transition-colors">Contact</a>
+            </div>
+            <a href="#contact" class="bg-cyan hover:bg-cyan/90 text-black px-6 py-2.5 rounded-full text-sm font-bold transition-all transform hover:scale-105">
+                Let's Talk
+            </a>
+        </div>
+    </nav>
+
+    <section class="min-h-screen flex flex-col justify-center items-center pt-32 pb-20 px-6 text-center">
+        <div class="relative flex justify-center items-center mb-10 w-full">
+        <div class="relative w-40 h-40 md:w-48 md:h-48">
+            <div class="absolute inset-0 rounded-full bg-cyan-500/20 blur-2xl animate-pulse"></div>
+            
+            <div class="relative w-full h-full rounded-full border-2 border-cyan-500 overflow-hidden shadow-[0_0_20px_rgba(34,211,238,0.4)] bg-[#0a0a0a]">
+                <img src="img/lakshya.jpeg" 
+                     alt="Lakshya Singh" 
+                     class="w-full h-full object-cover object-top block">
+            </div>
+        </div>
+    </div>
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan/30 bg-cyan/5 text-cyan text-xs font-bold mb-8">
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan"></span>
+            </span>
+            Available for opportunities
+        </div>
+        <h1 class="text-6xl md:text-8xl font-black mb-6 tracking-tight">
+            Hi, I'm <span class="text-cyan">Lakshya</span>
+        </h1>
+        <p class="text-2xl md:text-3xl text-gray-400 mb-6 font-semibold">Tech Student & Developer</p>
+        <p class="max-w-2xl mx-auto text-gray-500 text-lg mb-10 leading-relaxed">
+            Building innovative solutions through code. Second Year • Vellore Institute of Technology.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="#projects" class="flex items-center gap-2 bg-cyan hover:bg-cyan/90 text-black px-10 py-4 rounded-full font-bold transition-all cyan-glow">
+                View My Work <i class="fa-solid fa-arrow-right text-sm"></i>
+            </a>
+            <a href="#contact" class="flex items-center gap-2 border border-white/10 hover:bg-white/5 px-10 py-4 rounded-full font-bold transition-all">
+                Get In Touch <i class="fa-regular fa-envelope text-sm"></i>
+            </a>
+        </div>
+        <div class="flex justify-center gap-8 mt-16 text-gray-500 text-xl">
+            <a href="https://github.com/laksh1357" target="_blank" class="hover:text-white transition-colors"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/lakshya-singh-579175277" target="_blank" class="hover:text-white transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="mailto:singhlakshya7777@gmail.com" class="hover:text-white transition-colors"><i class="fa-regular fa-envelope"></i></a>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-20">
+            <h2 class="text-4xl font-black inline-block border-b-4 border-cyan pb-2">About <span class="text-cyan">Me</span></h2>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+                <h3 class="text-3xl font-bold mb-6 italic text-white leading-tight">Building the Future, One Line at a Time</h3>
+                <p class="text-gray-400 leading-relaxed mb-8 text-lg">
+                    I'm a passionate second-year tech student at VIT with a keen interest in software development 
+                    and emerging technologies. I love building projects that solve real-world problems and 
+                    constantly learning new technologies to expand my skill set.
+                </p>
+                <ul class="space-y-4 text-gray-300">
+                    <li class="flex items-center gap-3"><span class="h-2 w-2 rounded-full bg-cyan"></span> <strong>Location:</strong> Vellore, India</li>
+                    <li class="flex items-center gap-3"><span class="h-2 w-2 rounded-full bg-cyan"></span> <strong>University:</strong> Vellore Institute of Technology</li>
+                    <li class="flex items-center gap-3"><span class="h-2 w-2 rounded-full bg-cyan"></span> <strong>Email:</strong> lakshya@example.com</li>
+                </ul>
+            </div>
+            <div class="grid grid-cols-2 gap-6">
+                <div class="glass-card p-8 rounded-2xl">
+                    <i class="fa-solid fa-code text-cyan text-2xl mb-4"></i>
+                    <h4 class="font-bold mb-2">Clean Code</h4>
+                    <p class="text-xs text-gray-500">Writing maintainable, scalable, and efficient code.</p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl">
+                    <i class="fa-regular fa-lightbulb text-cyan text-2xl mb-4"></i>
+                    <h4 class="font-bold mb-2">Problem Solver</h4>
+                    <p class="text-xs text-gray-500">Turning complex challenges into elegant solutions.</p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl">
+                    <i class="fa-solid fa-users text-cyan text-2xl mb-4"></i>
+                    <h4 class="font-bold mb-2">Team Player</h4>
+                    <p class="text-xs text-gray-500">Collaborative approach to project development.</p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl">
+                    <i class="fa-solid fa-rocket text-cyan text-2xl mb-4"></i>
+                    <h4 class="font-bold mb-2">Fast Learner</h4>
+                    <p class="text-xs text-gray-500">Always exploring new technologies and frameworks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-24 bg-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black inline-block border-b-4 border-cyan pb-2">Skills & <span class="text-cyan">Technologies</span></h2>
+                <p class="text-gray-500 mt-6 max-w-lg mx-auto">A comprehensive toolkit for building modern web applications.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 mb-20">
+                <div class="glass-card p-8 rounded-2xl">
+                    <h4 class="text-lg font-bold mb-6 flex items-center gap-3"><span class="h-6 w-1 bg-cyan"></span> Frontend Development</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs text-gray-400">React</span>
+                        <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs text-gray-400">JavaScript</span>
+                        <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs text-gray-400">HTML5</span>
+                        <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs text-gray-400">CSS3</span>
+                    </div>
+                </div>
+                <div class="glass-card p-8 rounded-2xl">
+                    <h4 class="text-lg font-bold mb-6 flex items-center gap-3"><span class="h-6 w-1 bg-cyan"></span> Backend Development</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs text-gray-400">Node.js</span>
+                        <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs text-gray-400">Python</span>
+                        <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs text-gray-400">MongoDB</span>
+                    </div>
+                </div>
+                <div class="glass-card p-8 rounded-2xl">
+                    <h4 class="text-lg font-bold mb-6 flex items-center gap-3"><span class="h-6 w-1 bg-cyan"></span> Programming</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs text-gray-400">Java</span>
+                        <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs text-gray-400">C++</span>
+                        <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs text-gray-400">Python</span>
+                        <span class="px-4 py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs text-gray-400">C</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-wrap justify-between items-center text-center gap-10 px-10">
+                <div><p class="text-5xl font-black text-cyan mb-2">4</p><p class="text-xs text-gray-500 uppercase tracking-widest">Programming Language</p></div>
+                <div><p class="text-5xl font-black text-cyan mb-2">5</p><p class="text-xs text-gray-500 uppercase tracking-widest">Projects</p></div>
+                <div><p class="text-5xl font-black text-cyan mb-2">0</p><p class="text-xs text-gray-500 uppercase tracking-widest">GitHub Commits</p></div>
+                <div><p class="text-5xl font-black text-cyan mb-2">1+</p><p class="text-xs text-gray-500 uppercase tracking-widest">Years Learning</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-black inline-block border-b-4 border-cyan pb-2">Featured <span class="text-cyan">Projects</span></h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="glass-card rounded-3xl overflow-hidden group">
+                <div class="h-52 bg-gradient-to-br from-cyan/20 to-purple-500/10 flex items-center justify-center">
+                    <i class="fa-solid fa-brain text-5xl text-gray-700 group-hover:text-cyan transition-colors"></i>
+                </div>
+                <div class="p-8">
+                    <h4 class="text-xl font-bold mb-3">AI Task Manager</h4>
+                    <p class="text-gray-500 text-sm mb-6 leading-relaxed">A smart task management application with AI-powered priority suggestions and deadline predictions.</p>
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        <span class="px-3 py-1 bg-cyan/10 text-cyan rounded text-[10px] font-bold uppercase">React</span>
+                        <span class="px-3 py-1 bg-cyan/10 text-cyan rounded text-[10px] font-bold uppercase">Python</span>
+                        <span class="px-3 py-1 bg-cyan/10 text-cyan rounded text-[10px] font-bold uppercase">FastAPI</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <a href="#" class="flex-1 flex items-center justify-center gap-2 text-xs font-bold py-3 border border-white/10 rounded-xl hover:bg-white/5 transition-all"><i class="fa-brands fa-github"></i> Code</a>
+                        <a href="#" class="flex-1 flex items-center justify-center gap-2 text-xs font-bold py-3 border border-white/10 rounded-xl hover:bg-white/5 transition-all"><i class="fa-solid fa-link"></i> Demo</a>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-card rounded-3xl overflow-hidden group">
+                <div class="h-52 bg-gradient-to-br from-blue-500/20 to-cyan/10 flex items-center justify-center">
+                    <i class="fa-solid fa-graduation-cap text-5xl text-gray-700 group-hover:text-cyan transition-colors"></i>
+                </div>
+                <div class="p-8">
+                    <h4 class="text-xl font-bold mb-3">Campus Connect</h4>
+                    <p class="text-gray-500 text-sm mb-6 leading-relaxed">A social platform for VIT students to connect, share notes, and collaborate on projects.</p>
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        <span class="px-3 py-1 bg-cyan/10 text-cyan rounded text-[10px] font-bold uppercase">React</span>
+                        <span class="px-3 py-1 bg-cyan/10 text-cyan rounded text-[10px] font-bold uppercase">Node.js</span>
+                        <span class="px-3 py-1 bg-cyan/10 text-cyan rounded text-[10px] font-bold uppercase">Socket.io</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <a href="#" class="flex-1 flex items-center justify-center gap-2 text-xs font-bold py-3 border border-white/10 rounded-xl hover:bg-white/5 transition-all"><i class="fa-brands fa-github"></i> Code</a>
+                        <a href="#" class="flex-1 flex items-center justify-center gap-2 text-xs font-bold py-3 border border-white/10 rounded-xl hover:bg-white/5 transition-all"><i class="fa-solid fa-link"></i> Demo</a>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-card rounded-3xl overflow-hidden group">
+                <div class="h-52 bg-gradient-to-br from-red-500/10 to-cyan/10 flex items-center justify-center">
+                    <i class="fa-solid fa-terminal text-5xl text-gray-700 group-hover:text-cyan transition-colors"></i>
+                </div>
+                <div class="p-8">
+                    <h4 class="text-xl font-bold mb-3">Code Battle Arena</h4>
+                    <p class="text-gray-500 text-sm mb-6 leading-relaxed">An online competitive programming platform where students can participate in coding challenges.</p>
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        <span class="px-3 py-1 bg-cyan/10 text-cyan rounded text-[10px] font-bold uppercase">React</span>
+                        <span class="px-3 py-1 bg-cyan/10 text-cyan rounded text-[10px] font-bold uppercase">Express.js</span>
+                        <span class="px-3 py-1 bg-cyan/10 text-cyan rounded text-[10px] font-bold uppercase">MySQL</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <a href="#" class="flex-1 flex items-center justify-center gap-2 text-xs font-bold py-3 border border-white/10 rounded-xl hover:bg-white/5 transition-all"><i class="fa-brands fa-github"></i> Code</a>
+                        <a href="#" class="flex-1 flex items-center justify-center gap-2 text-xs font-bold py-3 border border-white/10 rounded-xl hover:bg-white/5 transition-all"><i class="fa-solid fa-link"></i> Demo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-12">
+            <button class="px-8 py-3 bg-white/5 border border-white/10 rounded-xl font-bold text-sm hover:bg-cyan hover:text-black transition-all">View All Projects (4)</button>
+        </div>
+    </section>
+
+    <section id="education" class="py-24 bg-white/5 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black inline-block border-b-4 border-cyan pb-2">Education <span class="text-cyan">Journey</span></h2>
+            </div>
+            <div class="space-y-8">
+                <div class="glass-card p-10 rounded-3xl relative overflow-hidden">
+                    <div class="absolute left-0 top-0 h-full w-1.5 bg-cyan"></div>
+                    <div class="flex flex-col md:flex-row md:items-start justify-between gap-6">
+                        <div class="flex items-center gap-6">
+                            <div class="p-4 bg-cyan/10 rounded-2xl text-cyan"><i class="fa-solid fa-graduation-cap text-2xl"></i></div>
+                            <div>
+                                <h4 class="text-2xl font-bold">Bachelor of Technology</h4>
+                                <p class="text-cyan font-semibold text-sm mb-2">Computer Science and Engineering (DATA SCIENCE)</p>
+                                <div class="flex flex-wrap gap-x-6 gap-y-2 text-xs text-gray-500">
+                                    <span><i class="fa-solid fa-location-dot mr-1"></i> VIT Vellore, Tamil Nadu</span>
+                                    <span><i class="fa-solid fa-calendar mr-1"></i> 2024 - 2028</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="px-4 py-1.5 bg-cyan/10 text-cyan rounded-full text-[10px] font-black uppercase self-start">Current</span>
+                    </div>
+                    <div class="mt-8 grid md:grid-cols-3 gap-4 border-t border-white/5 pt-8">
+                        <div class="text-center"><p class="text-sm font-bold text-gray-200">9.55</p><p class="text-[10px] text-gray-500 uppercase">Current CGPA</p></div>
+                        <div class="text-center"><p class="text-sm font-bold text-gray-200">Dean's List</p><p class="text-[10px] text-gray-500 uppercase">Academic Excellence</p></div>
+                        <div class="text-center"><p class="text-sm font-bold text-gray-200">Member MFC</p><p class="text-[10px] text-gray-500 uppercase">Technical Clubs</p></div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-10 rounded-3xl">
+                    <div class="flex flex-col md:flex-row md:items-start justify-between gap-6">
+                        <div class="flex items-center gap-6 text-gray-400">
+                            <div class="p-4 bg-white/5 rounded-2xl"><i class="fa-solid fa-graduation-cap text-2xl"></i></div>
+                            <div>
+                                <h4 class="text-2xl font-bold text-white">Higher Secondary Education (12<sup>th</sup>)</h4>
+                                <p class="text-gray-400 font-semibold text-sm mb-2">Science (PCM)</p>
+                                <div class="flex flex-wrap gap-x-6 gap-y-2 text-xs text-gray-500">
+                                    <span><i class="fa-solid fa-location-dot mr-1"></i> St Xavier's School, Lucknow</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 grid md:grid-cols-3 gap-4 border-t border-white/5 pt-8">
+                        <div class="text-center"><p class="text-sm font-bold text-gray-200">83.75%</p><p class="text-[10px] text-gray-500 uppercase">Percentage</p></div>
+                        <div class="text-center"><p class="text-sm font-bold text-gray-200">Average Student</p><p class="text-[10px] text-gray-500 uppercase">Computer Science</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-black inline-block border-b-4 border-cyan pb-2">Achievements & <span class="text-cyan">Certifications</span></h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 mb-16">
+            <div class="glass-card p-8 rounded-3xl flex items-center gap-6">
+                <div class="p-5 bg-cyan/10 text-cyan rounded-2xl"><i class="fa-solid fa-trophy text-2xl"></i></div>
+                <div>
+                    <h5 class="font-bold">Coursera-Google-DATA ANALYTICS</h5>
+                    <p class="text-xs text-gray-500">Coursera • 2026</p>
+                </div>
+            </div>
+            <div class="glass-card p-8 rounded-3xl flex items-center gap-6">
+                <div class="p-5 bg-cyan/10 text-cyan rounded-2xl"><i class="fa-solid fa-award text-2xl"></i></div>
+                <div>
+                    <h5 class="font-bold">IBM Business Analyst</h5>
+                    <p class="text-xs text-gray-500">Coursera . 2026</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="glass-card p-6 rounded-2xl text-center">
+                <div class="h-12 w-12 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4 text-cyan"><i class="fa-solid fa-certificate"></i></div>
+                <h6 class="text-sm font-bold">AWS Certified</h6>
+                <p class="text-[10px] text-gray-500 uppercase mt-1">Cloud Practitioner</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl text-center">
+                <div class="h-12 w-12 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4 text-cyan"><i class="fa-solid fa-certificate"></i></div>
+                <h6 class="text-sm font-bold">Full Stack Dev</h6>
+                <p class="text-[10px] text-gray-500 uppercase mt-1">Coursera (Meta)</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl text-center">
+                <div class="h-12 w-12 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4 text-cyan"><i class="fa-solid fa-certificate"></i></div>
+                <h6 class="text-sm font-bold">Python DS</h6>
+                <p class="text-[10px] text-gray-500 uppercase mt-1">IBM (Coursera)</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl text-center">
+                <div class="h-12 w-12 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4 text-cyan"><i class="fa-solid fa-certificate"></i></div>
+                <h6 class="text-sm font-bold">Machine Learning</h6>
+                <p class="text-[10px] text-gray-500 uppercase mt-1">Stanford Online</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 px-6 bg-white/5">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black inline-block border-b-4 border-cyan pb-2">Get In <span class="text-cyan">Touch</span></h2>
+                <p class="text-gray-500 mt-6">Have a question or want to work together? Feel free to reach out!</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-16">
+                <div>
+                    <h3 class="text-3xl font-bold mb-6">Let's Connect</h3>
+                    <p class="text-gray-400 mb-10 leading-relaxed">I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-6">
+                            <div class="p-4 bg-white/5 rounded-2xl text-cyan"><i class="fa-regular fa-envelope text-xl"></i></div>
+                            <div><p class="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Email</p><p class="font-bold">singhlakshya7777@gmail.com</p></div>
+                        </div>
+                        <div class="flex items-center gap-6">
+                            <div class="p-4 bg-white/5 rounded-2xl text-cyan"><i class="fa-solid fa-location-dot text-xl"></i></div>
+                            <div><p class="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Location</p><p class="font-bold">VIT Vellore, India</p></div>
+                        </div>
+                    </div>
+                    <div class="mt-12">
+                        <p class="text-xs text-gray-500 uppercase tracking-widest mb-6">Follow me on social media</p>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/laksh1357" class="h-12 w-12 glass-card rounded-xl flex items-center justify-center hover:bg-cyan hover:text-black transition-all"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/lakshya-singh-579175277" class="h-12 w-12 glass-card rounded-xl flex items-center justify-center hover:bg-cyan hover:text-black transition-all"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" class="h-12 w-12 glass-card rounded-xl flex items-center justify-center hover:bg-cyan hover:text-black transition-all"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/laksh.ya_03_" class="h-12 w-12 glass-card rounded-xl flex items-center justify-center hover:bg-cyan hover:text-black transition-all"><i class="fa-brands fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <form id="contact-form" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-[10px] text-gray-500 uppercase font-black ml-2">Your Name *</label>
+                            <input type="text" required placeholder="Enter your name" class="w-full bg-[#0a0a0a] border border-white/10 p-4 rounded-2xl focus:border-cyan outline-none text-sm transition-all">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] text-gray-500 uppercase font-black ml-2">Your Email *</label>
+                            <input type="email" required placeholder="yourname@example.com" class="w-full bg-[#0a0a0a] border border-white/10 p-4 rounded-2xl focus:border-cyan outline-none text-sm transition-all">
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] text-gray-500 uppercase font-black ml-2">Subject *</label>
+                        <input type="text" required placeholder="How can I help you?" class="w-full bg-[#0a0a0a] border border-white/10 p-4 rounded-2xl focus:border-cyan outline-none text-sm transition-all">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] text-gray-500 uppercase font-black ml-2">Message *</label>
+                        <textarea required placeholder="Tell me about your project..." rows="5" class="w-full bg-[#0a0a0a] border border-white/10 p-4 rounded-2xl focus:border-cyan outline-none text-sm transition-all"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-cyan hover:bg-cyan/90 text-black font-black py-5 rounded-2xl flex items-center justify-center gap-3 transition-all cyan-glow">
+                        Send Message <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-white/5 text-center">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:row items-center justify-between gap-8">
+            <div class="text-left">
+                <span class="text-2xl font-black tracking-tighter block mb-2">Lakshya</span>
+                <p class="text-gray-500 text-xs">Building innovative solutions through code</p>
+            </div>
+            <div class="flex gap-10 text-[10px] text-gray-500 uppercase font-black tracking-widest">
+                <a href="#about" class="hover:text-white">About</a>
+                <a href="#skills" class="hover:text-white">Skills</a>
+                <a href="#projects" class="hover:text-white">Projects</a>
+                <a href="#contact" class="hover:text-white">Contact</a>
+            </div>
+        </div>
+        <div class="mt-12 text-[10px] text-gray-600 uppercase tracking-tighter">
+            © 2026 Lakshya. All rights reserved. | Made with <span class="text-cyan">💙</span> and lots of <span class="text-cyan">☕</span>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form Submission simple logic
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button');
+            const originalContent = btn.innerHTML;
+            
+            btn.innerHTML = 'Sending... <i class="fa-solid fa-spinner animate-spin"></i>';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                alert('Thank you! Your message has been sent successfully.');
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+                this.reset();
+            }, 2000);
+        });
+
+        // Reveal on scroll animation
+        const reveal = () => {
+            const reveals = document.querySelectorAll('.glass-card');
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("opacity-100");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+    </script>
+</body>
+</html>
