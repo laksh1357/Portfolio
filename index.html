@@ -101,7 +101,6 @@
         <div class="absolute inset-0 rounded-full bg-cyan-400/20 blur-2xl animate-pulse"></div>
 
         <div class="relative w-full h-full rounded-full border-2 border-cyan-400 overflow-hidden shadow-[0_0_20px_rgba(34,211,238,0.4)] bg-[#0a0a0a]">
-
           <img
             src="img/lakshya.jpeg"
             alt="Lakshya Singh"
@@ -346,25 +345,18 @@
         </div>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-8">
       <div class="glass-card reveal rounded-3xl overflow-hidden group">
         <div class="h-52 bg-gradient-to-br from-cyan-400/20 to-purple-500/10 flex items-center justify-center">
-          <i class="fa-solid fa-worm text-5xl text-gray-700 group-hover:text-cyan-400 transition-colors"></i>
+          <i class="fa-solid fa-robot text-5xl text-gray-700 group-hover:text-cyan-400 transition-colors"></i>
         </div>
         <div class="p-8">
-          <h4 class="text-xl font-bold mb-3">Snake Game</h4>
+          <h4 class="text-xl font-bold mb-3">AI Task Manager</h4>
           <p class="text-gray-500 text-sm mb-6 leading-relaxed">
-            A classic Snake Game built with HTML, CSS, and JavaScript where the player controls
-            a growing snake to collect food while avoiding collisions.
+            A smart task manager application that helps organize and track tasks efficiently.
           </p>
-          <div class="flex flex-wrap gap-2 mb-8">
-            <span class="px-3 py-1 bg-cyan-400/10 text-cyan-400 rounded text-[10px] font-bold uppercase">HTML</span>
-            <span class="px-3 py-1 bg-cyan-400/10 text-cyan-400 rounded text-[10px] font-bold uppercase">CSS</span>
-            <span class="px-3 py-1 bg-cyan-400/10 text-cyan-400 rounded text-[10px] font-bold uppercase">JavaScript</span>
-          </div>
           <div class="flex gap-4">
-            <a href="ai-task-manager--lakshsingh0054.replit.app" target="_blank" rel="noopener noreferrer" class="flex-1 flex items-center justify-center gap-2 text-xs font-bold py-3 border border-white/10 rounded-xl hover:bg-white/5 transition-all">
-              <i class="fa-brands fa-replit"></i> Link
+            <a href="https://ai-task-manager--lakshsingh0054.replit.app" target="_blank" rel="noopener noreferrer" class="flex-1 flex items-center justify-center gap-2 text-xs font-bold py-3 border border-white/10 rounded-xl hover:bg-white/5 transition-all">
+              <i class="fa-solid fa-link"></i> Link
             </a>
           </div>
         </div>
@@ -602,7 +594,6 @@
           </div>
         </div>
 
-        <!-- Honest demo form -->
         <div>
           <form id="contact-form" class="space-y-6">
             <div class="grid md:grid-cols-2 gap-6">
@@ -660,7 +651,6 @@
   </footer>
 
   <script>
-    // Smooth scroll for internal nav links
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener('click', function (e) {
         const targetSelector = this.getAttribute('href');
@@ -673,14 +663,13 @@
       });
     });
 
-    // Honest contact form behavior
     const contactForm = document.getElementById('contact-form');
     const formMessage = document.getElementById('form-message');
 
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      const name = this.querySelector('input[type="text"]').value.trim();
+      const name = this.querySelectorAll('input[type="text"]')[0].value.trim();
       const email = this.querySelector('input[type="email"]').value.trim();
       const subject = this.querySelectorAll('input[type="text"]')[1].value.trim();
       const message = this.querySelector('textarea').value.trim();
@@ -697,7 +686,6 @@
       window.location.href = mailtoLink;
     });
 
-    // Reveal animation
     const revealElements = document.querySelectorAll('.reveal');
 
     function revealOnScroll() {
