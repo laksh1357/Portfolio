@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakshya Singh | Systems & Compilers Engineer</title>
+    
+    <!-- Meta tags for SEO & Social Cards -->
+    <meta name="description" content="Portfolio of Lakshya Singh — Systems Architecture & Compiler Design Engineer at VIT Vellore. Specializing in low-level OS sandboxing, compiler IR, LL(1) parsers, and hybrid RAG search systems.">
+    <meta name="keywords" content="Lakshya Singh, Systems Engineer, Compiler Design, VIT Vellore, Warden OS Sandbox, Sudarshan Compiler, C++, Python, Seccomp-BPF, Low-Latency Systems">
+    <meta name="author" content="Lakshya Singh">
+    <meta property="og:title" content="Lakshya Singh | Systems & Compilers Engineer">
+    <meta property="og:description" content="Engineering at the Hardware-Software Boundary. Systems Architecture, Compilers, OS Sandboxing, and Hybrid RAG Pipelines.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#050507">
+
+    <!-- Favicon (Terminal >_ Icon) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23090a0f'/><text x='50%' y='62%' font-family='monospace' font-size='55' font-weight='bold' fill='%2300f2fe' text-anchor='middle'>&gt;_</text></svg>">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-base: #050507;
+            --cyan-accent: #00f2fe;
+            --cyan-glow: rgba(0, 242, 254, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-base);
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        .font-mono-code {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .bg-grid-pattern {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+
+        .spec-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .spec-card:hover {
+            border-color: rgba(0, 242, 254, 0.35);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px -10px rgba(0, 242, 254, 0.15);
+        }
+
+        .terminal-window {
+            background: #090a0f;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050507; }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00f2fe; }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-link.active-nav {
+            color: #00f2fe;
+            border-bottom: 2px solid #00f2fe;
+        }
+
+        /* Toast notification animation */
+        #toast {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Custom scrollable terminal area */
+        .term-logs::-webkit-scrollbar {
+            width: 4px;
+        }
+        .term-logs::-webkit-scrollbar-thumb {
+            background: rgba(0, 242, 254, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-grid-pattern relative selection:bg-cyan-500/20 selection:text-cyan-300">
+
+    <!-- Ambient Glowing Orbs -->
+    <div class="fixed top-0 left-1/4 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+    <div class="fixed bottom-1/4 right-1/4 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[160px] pointer-events-none -z-10"></div>
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 w-full z-50 bg-[#050507]/85 backdrop-blur-xl border-b border-white/[0.08]">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-mono-code font-bold text-sm transition-all group-hover:border-cyan-400 group-hover:bg-cyan-500/20 shadow-[0_0_15px_rgba(0,242,254,0.15)]">
+                    &gt;_
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-sm font-bold tracking-tight text-white group-hover:text-cyan-400 transition-colors">Lakshya Singh</span>
+                    <span class="text-[10px] font-mono-code text-gray-500 uppercase tracking-widest">Sys / Compilers</span>
+                </div>
+            </a>
+
+            <nav id="desktop-nav" class="hidden md:flex items-center gap-8 text-xs font-mono-code uppercase tracking-wider text-gray-400">
+                <a href="#about" class="nav-link py-1 hover:text-cyan-400 transition-colors">01.//about</a>
+                <a href="#skills" class="nav-link py-1 hover:text-cyan-400 transition-colors">02.//skills</a>
+                <a href="#leetcode" class="nav-link py-1 hover:text-cyan-400 transition-colors">03.//leetcode</a>
+                <a href="#projects" class="nav-link py-1 hover:text-cyan-400 transition-colors">04.//projects</a>
+                <a href="#education" class="nav-link py-1 hover:text-cyan-400 transition-colors">05.//education</a>
+                <a href="#achievements" class="nav-link py-1 hover:text-cyan-400 transition-colors">06.//achievements</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <a href="#contact" class="hidden sm:inline-flex items-center gap-2 bg-white/5 hover:bg-cyan-500 hover:text-black border border-white/10 hover:border-cyan-400 text-gray-200 px-5 py-2 rounded-lg text-xs font-mono-code font-semibold transition-all shadow-sm hover:shadow-[0_0_20px_rgba(0,242,254,0.3)]">
+                    <span>init_contact()</span>
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-400 hover:text-white p-2" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars-staggered text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 py-5 bg-[#08090d] border-b border-white/10 font-mono-code text-xs space-y-4">
+            <a href="#about" class="block text-gray-400 hover:text-cyan-400 py-1">// about</a>
+            <a href="#skills" class="block text-gray-400 hover:text-cyan-400 py-1">// skills</a>
+            <a href="#leetcode" class="block text-gray-400 hover:text-cyan-400 py-1">// leetcode</a>
+            <a href="#projects" class="block text-gray-400 hover:text-cyan-400 py-1">// projects</a>
+            <a href="#education" class="block text-gray-400 hover:text-cyan-400 py-1">// education</a>
+            <a href="#achievements" class="block text-gray-400 hover:text-cyan-400 py-1">// achievements</a>
+            <a href="#contact" class="block text-cyan-400 font-bold py-1">// init_contact()</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="min-h-screen pt-36 pb-20 px-6 max-w-7xl mx-auto flex flex-col justify-center">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-full border border-cyan-500/20 bg-cyan-500/5 text-cyan-400 text-xs font-mono-code">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
+                        </span>
+                        SYSTEMS ARCHITECTURE & COMPILER DESIGN
+                    </div>
+
+                    <h1 class="text-4xl sm:text-6xl xl:text-7xl font-black tracking-tight text-white leading-none">
+                        Engineering at the <br class="hidden sm:inline">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500">
+                            Hardware-Software
+                        </span> Boundary.
+                    </h1>
+
+                    <p class="text-gray-400 text-base sm:text-lg max-w-2xl leading-relaxed">
+                        Computer Science undergraduate at VIT Vellore. Building deterministic compilers, OS-level code isolation sandboxes, and low-latency retrieval pipelines.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="#projects" class="px-7 py-3.5 rounded-lg bg-cyan-400 hover:bg-cyan-300 text-black font-mono-code text-xs font-bold transition-all shadow-[0_0_25px_rgba(0,242,254,0.3)] flex items-center gap-2">
+                            <span>inspect_work()</span>
+                            <i class="fa-solid fa-arrow-down text-[10px]"></i>
+                        </a>
+                        <button onclick="copyEmailToClipboard()" class="px-6 py-3.5 rounded-lg border border-white/10 hover:border-cyan-500/40 bg-white/[0.02] hover:bg-white/[0.05] text-gray-300 font-mono-code text-xs font-medium transition-all flex items-center gap-2.5">
+                            <i class="fa-regular fa-copy text-gray-400"></i>
+                            <span>copy_email</span>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-6 pt-6 text-gray-500 text-lg font-mono-code flex-wrap">
+                        <a href="https://github.com/laksh1357" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition-colors flex items-center gap-1.5 text-sm" title="GitHub">
+                            <i class="fa-brands fa-github text-lg"></i>
+                            <span class="text-xs">laksh1357</span>
+                        </a>
+                        <a href="https://leetcode.com/u/lakshya_03_/" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition-colors flex items-center gap-1.5 text-sm" title="LeetCode Profile: lakshya_03_">
+                            <i class="fa-solid fa-code text-lg"></i>
+                            <span class="text-xs">lakshya_03_</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/lakshya-singh-579175277" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition-colors flex items-center gap-1.5 text-sm" title="LinkedIn">
+                            <i class="fa-brands fa-linkedin text-lg"></i>
+                            <span class="text-xs">Lakshya Singh</span>
+                        </a>
+                        <a href="mailto:singhlakshya7777@gmail.com" class="hover:text-cyan-400 transition-colors flex items-center gap-1.5 text-sm" title="Email">
+                            <i class="fa-regular fa-envelope text-lg"></i>
+                        </a>
+                        <span class="text-xs text-gray-600 font-mono-code">| VIT Vellore • 2024-2028</span>
+                    </div>
+                </div>
+
+                <!-- Interactive Diagnostic CLI Terminal Widget -->
+                <div class="lg:col-span-5">
+                    <div class="terminal-window rounded-xl overflow-hidden font-mono-code text-xs border border-white/10">
+                        <div class="px-4 py-3 bg-[#111218] border-b border-white/5 flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500/80 cursor-pointer" onclick="clearTerminalLogs()" title="Clear screen"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                            </div>
+                            <span class="text-[11px] text-gray-400 font-semibold">warden_daemon --diagnostics</span>
+                            <span class="text-[10px] text-cyan-400 px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20 font-bold">LIVE INTERACTIVE</span>
+                        </div>
+
+                        <!-- Quick Command Bar -->
+                        <div class="px-4 py-2 bg-[#0d0e14] border-b border-white/5 flex items-center gap-2 overflow-x-auto text-[10px]">
+                            <span class="text-gray-500 uppercase tracking-wider">Quick:</span>
+                            <button onclick="runTermCommand('cat /proc/sys/kernel/identity')" class="px-2 py-0.5 rounded bg-white/5 hover:bg-cyan-500/20 text-gray-300 hover:text-cyan-300 transition-colors">identity</button>
+                            <button onclick="runTermCommand('check-subsystems')" class="px-2 py-0.5 rounded bg-white/5 hover:bg-cyan-500/20 text-gray-300 hover:text-cyan-300 transition-colors">subsystems</button>
+                            <button onclick="runTermCommand('ls projects')" class="px-2 py-0.5 rounded bg-white/5 hover:bg-cyan-500/20 text-gray-300 hover:text-cyan-300 transition-colors">projects</button>
+                            <button onclick="runTermCommand('help')" class="px-2 py-0.5 rounded bg-white/5 hover:bg-cyan-500/20 text-gray-300 hover:text-cyan-300 transition-colors">help</button>
+                        </div>
+
+                        <div id="terminal-output" class="term-logs p-6 space-y-3.5 text-gray-300 leading-relaxed max-h-[360px] overflow-y-auto">
+                            <div>
+                                <span class="text-cyan-400">root@node01:~$</span> cat /proc/sys/kernel/identity
+                            </div>
+                            <div class="text-gray-400 pl-2 border-l border-white/10 space-y-1">
+                                <p><span class="text-gray-500">NAME:</span> Lakshya Singh</p>
+                                <p><span class="text-gray-500">DEPT:</span> CSE (Data Science) @ VIT Vellore</p>
+                                <p><span class="text-gray-500">CGPA:</span> 9.52 (Dean's List Equivalent)</p>
+                                <p><span class="text-gray-500">LEETCODE:</span> @lakshya_03_ (Active)</p>
+                            </div>
+
+                            <div class="pt-2">
+                                <span class="text-cyan-400">root@node01:~$</span> check-subsystems --active
+                            </div>
+                            <div class="text-gray-400 pl-2 border-l border-white/10 space-y-1">
+                                <p class="text-emerald-400">✓ seccomp_bpf: 5-layer isolation active</p>
+                                <p class="text-emerald-400">✓ sudarshan_vm: 22/22 unit tests passed</p>
+                                <p class="text-emerald-400">✓ rag_pipeline: BM25 + dense hybrid ready</p>
+                                <p class="text-emerald-400">✓ lan_scanner: socket daemon listener ok</p>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Terminal Input -->
+                        <div class="px-4 py-3 bg-[#0c0d12] border-t border-white/5 flex items-center gap-2">
+                            <span class="text-cyan-400 font-bold">root@node01:~$</span>
+                            <input type="text" id="terminal-input" placeholder="Type 'help' or 'cat about'..." class="w-full bg-transparent border-none outline-none text-cyan-300 font-mono-code text-xs placeholder:text-gray-600">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Technical About Section -->
+        <section id="about" class="py-24 px-6 max-w-7xl mx-auto border-t border-white/[0.08] fade-in-up">
+            <div class="mb-14">
+                <span class="text-xs font-mono-code text-cyan-400 uppercase tracking-widest">01. Overview</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Architecture & Engineering Scope</h2>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-7 space-y-6 text-gray-300 leading-relaxed text-sm sm:text-base">
+                    <p>
+                        Computer Science undergraduate with strong foundations in C++, Python, SQL, Data Structures, and Algorithms. Focus areas include systems programming, compiler toolchains, operating system isolation mechanisms, and backend infrastructure.
+                    </p>
+                    <p class="text-gray-400">
+                        Proven experience developing full-pipeline software from scratch: writing top-down recursive descent parsers with multi-pass intermediate representation optimizers, engineering kernel sandboxes using Linux namespaces and cgroups v2, and deploying modular search pipelines.
+                    </p>
+                    <div class="grid sm:grid-cols-2 gap-4 pt-4 font-mono-code text-xs">
+                        <div class="p-4 rounded-lg bg-white/[0.02] border border-white/[0.06]">
+                            <span class="text-gray-500 block mb-1">UNIVERSITY</span>
+                            <span class="text-gray-200 font-semibold">VIT Vellore (2024-2028)</span>
+                        </div>
+                        <div class="p-4 rounded-lg bg-white/[0.02] border border-white/[0.06]">
+                            <span class="text-gray-500 block mb-1">PROGRAM</span>
+                            <span class="text-gray-200 font-semibold">B.Tech CSE (Data Science)</span>
+                        </div>
+                        <div class="p-4 rounded-lg bg-white/[0.02] border border-white/[0.06]">
+                            <span class="text-gray-500 block mb-1">ACADEMIC STANDING</span>
+                            <span class="text-cyan-400 font-semibold">9.52 CGPA • Currently 3rd Year</span>
+                        </div>
+                        <div class="p-4 rounded-lg bg-white/[0.02] border border-white/[0.06]">
+                            <span class="text-gray-500 block mb-1">LOCATION</span>
+                            <span class="text-gray-200 font-semibold">Vellore, TN, India</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 grid grid-cols-2 gap-4">
+                    <div class="spec-card p-6 rounded-xl">
+                        <i class="fa-solid fa-microchip text-cyan-400 text-xl mb-3"></i>
+                        <h3 class="text-white font-bold text-sm mb-1">Compilers & IR</h3>
+                        <p class="text-gray-500 text-xs leading-relaxed">Lexical tokenization, AST generation, TAC linearization, and VM interpreters.</p>
+                    </div>
+                    <div class="spec-card p-6 rounded-xl">
+                        <i class="fa-solid fa-shield-halved text-cyan-400 text-xl mb-3"></i>
+                        <h3 class="text-white font-bold text-sm mb-1">Kernel Isolation</h3>
+                        <p class="text-gray-500 text-xs leading-relaxed">Seccomp-BPF filters, namespaces, memory shredding, and egress constraints.</p>
+                    </div>
+                    <div class="spec-card p-6 rounded-xl">
+                        <i class="fa-solid fa-network-wired text-cyan-400 text-xl mb-3"></i>
+                        <h3 class="text-white font-bold text-sm mb-1">Network Telemetry</h3>
+                        <p class="text-gray-500 text-xs leading-relaxed">Subnet discovery sweeps, raw ARP broadcast analysis, and socket multithreading.</p>
+                    </div>
+                    <div class="spec-card p-6 rounded-xl">
+                        <i class="fa-solid fa-database text-cyan-400 text-xl mb-3"></i>
+                        <h3 class="text-white font-bold text-sm mb-1">Data Storage</h3>
+                        <p class="text-gray-500 text-xs leading-relaxed">Relational schemas, ACID guarantees, SQLite WAL mode, and audit trails.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Matrix / Skills Section -->
+        <section id="skills" class="py-24 px-6 max-w-7xl mx-auto border-t border-white/[0.08] fade-in-up">
+            <div class="mb-14">
+                <span class="text-xs font-mono-code text-cyan-400 uppercase tracking-widest">02. Stack</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Technical Matrix & Competencies</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="spec-card p-7 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="text-xs font-mono-code text-cyan-400">LANGUAGES</span>
+                            <i class="fa-solid fa-code text-gray-600 text-sm"></i>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">C</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">C++</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">Python 3</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">SQL</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">JavaScript</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">HTML5 / CSS3</span>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-gray-500 font-mono-code mt-6 pt-4 border-t border-white/5">Low-level execution, systems logic & scripting.</p>
+                </div>
+
+                <div class="spec-card p-7 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="text-xs font-mono-code text-cyan-400">THEORY & FOUNDATIONS</span>
+                            <i class="fa-solid fa-layer-group text-gray-600 text-sm"></i>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">DSA</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">OOP</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">DBMS</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">Computer Networks</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">Compiler Construction</span>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-gray-500 font-mono-code mt-6 pt-4 border-t border-white/5">Complexity analysis, systems design & protocol specs.</p>
+                </div>
+
+                <div class="spec-card p-7 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="text-xs font-mono-code text-cyan-400">DATA PERSISTENCE</span>
+                            <i class="fa-solid fa-database text-gray-600 text-sm"></i>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">PostgreSQL</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">Oracle SQL</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">SQLite (WAL Mode)</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">Schema Design</span>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-gray-500 font-mono-code mt-6 pt-4 border-t border-white/5">Parameterized SQL, audit trails & concurrent locks.</p>
+                </div>
+
+                <div class="spec-card p-7 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="text-xs font-mono-code text-cyan-400">DATA & NUMERICAL</span>
+                            <i class="fa-solid fa-chart-line text-gray-600 text-sm"></i>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">Pandas</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">NumPy</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">Matplotlib</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">FastAPI</span>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-gray-500 font-mono-code mt-6 pt-4 border-t border-white/5">Dataset parsing, statistical transforms & telemetry plots.</p>
+                </div>
+
+                <div class="spec-card p-7 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="text-xs font-mono-code text-cyan-400">SYSTEMS & TOOLS</span>
+                            <i class="fa-solid fa-terminal text-gray-600 text-sm"></i>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">Linux / Bash</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">Git / GitHub</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">Docker</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">VS Code</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">CustomTkinter</span>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-gray-500 font-mono-code mt-6 pt-4 border-t border-white/5">Containerized workflows, version control & shell primitives.</p>
+                </div>
+
+                <div class="spec-card p-7 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="text-xs font-mono-code text-cyan-400">RETRIEVAL & AI</span>
+                            <i class="fa-solid fa-brain text-gray-600 text-sm"></i>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">Hybrid RAG</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">BM25 Sparse</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">Dense Embeddings</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">RRF Fusion</span>
+                            <span class="px-3 py-1 bg-white/[0.04] border border-white/10 rounded text-xs font-mono-code text-gray-200">Generative AI</span>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-gray-500 font-mono-code mt-6 pt-4 border-t border-white/5">Multi-tenant vector search & prompt engineering.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LeetCode Engineering Metrics Section -->
+        <section id="leetcode" class="py-24 px-6 max-w-7xl mx-auto border-t border-white/[0.08] fade-in-up">
+            <div class="mb-14 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div>
+                    <span class="text-xs font-mono-code text-cyan-400 uppercase tracking-widest">03. Problem Solving</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Algorithmic Competency</h2>
+                </div>
+                <a href="https://leetcode.com/u/lakshya_03_/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-mono-code text-xs text-cyan-400 hover:underline">
+                    <span>leetcode.com/u/lakshya_03_</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+            </div>
+
+            <div class="spec-card rounded-2xl p-8 lg:p-10 border border-white/10">
+                <div class="grid lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-8 space-y-4">
+                        <div class="flex items-center gap-3">
+                            <span class="px-3 py-1 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono-code text-xs font-bold">
+                                LEETCODE ACTIVE PROFILE
+                            </span>
+                            <span class="text-gray-500 font-mono-code text-xs">@lakshya_03_</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white tracking-tight">
+                            Algorithmic Problem Solving & Data Structures
+                        </h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Continuous practice in core algorithms: Dynamic Programming, Graph Traversals, Tree Recursion, Two Pointers, and Binary Search. Focused on optimal time and space complexity with C++ and Python.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded font-mono-code text-xs text-gray-300">Arrays & Hashing</span>
+                            <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded font-mono-code text-xs text-gray-300">Trees & Graphs</span>
+                            <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded font-mono-code text-xs text-gray-300">Dynamic Programming</span>
+                            <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded font-mono-code text-xs text-gray-300">Sliding Window</span>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-4 flex flex-col justify-between h-full space-y-4 lg:border-l lg:border-white/10 lg:pl-8">
+                        <div class="p-4 rounded-lg bg-black/40 border border-white/5 font-mono-code text-xs space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">HANDLE:</span>
+                                <span class="text-cyan-400 font-bold">lakshya_03_</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">PRIMARY LANG:</span>
+                                <span class="text-gray-300">C++ / Python</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">FOCUS:</span>
+                                <span class="text-emerald-400">DSA & Complexity</span>
+                            </div>
+                        </div>
+                        <a href="https://leetcode.com/u/lakshya_03_/" target="_blank" rel="noopener noreferrer" class="w-full py-3 text-center rounded-lg bg-white/5 hover:bg-cyan-400 hover:text-black border border-white/10 font-mono-code text-xs font-bold text-gray-200 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-terminal"></i>
+                            <span>open_leetcode_profile()</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Projects Section -->
+        <section id="projects" class="py-24 px-6 max-w-7xl mx-auto border-t border-white/[0.08] fade-in-up">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="text-xs font-mono-code text-cyan-400 uppercase tracking-widest">04. Repositories</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Production Implementations</h2>
+                </div>
+                
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap gap-2 font-mono-code text-xs">
+                    <button onclick="filterProjects('all')" class="proj-filter-btn px-3 py-1.5 rounded bg-cyan-400 text-black font-bold border border-cyan-400 transition-all">All (6)</button>
+                    <button onclick="filterProjects('systems')" class="proj-filter-btn px-3 py-1.5 rounded bg-white/5 text-gray-400 hover:text-white border border-white/10 transition-all">Systems</button>
+                    <button onclick="filterProjects('compilers')" class="proj-filter-btn px-3 py-1.5 rounded bg-white/5 text-gray-400 hover:text-white border border-white/10 transition-all">Compilers</button>
+                    <button onclick="filterProjects('ai')" class="proj-filter-btn px-3 py-1.5 rounded bg-white/5 text-gray-400 hover:text-white border border-white/10 transition-all">AI / RAG</button>
+                    <button onclick="filterProjects('demos')" class="proj-filter-btn px-3 py-1.5 rounded bg-white/5 text-gray-400 hover:text-white border border-white/10 transition-all">Web Demos</button>
+                </div>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Project 1: Warden -->
+                <div class="project-item spec-card rounded-2xl p-8 lg:p-10 border border-white/10" data-category="systems">
+                    <div class="grid lg:grid-cols-12 gap-8 items-start">
+                        <div class="lg:col-span-8 space-y-4">
+                            <div class="flex items-center gap-3">
+                                <span class="px-2.5 py-1 rounded bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-mono-code text-[11px] font-bold">SYSTEMS SECURITY</span>
+                                <span class="text-gray-500 font-mono-code text-xs">linux / cgroups / seccomp</span>
+                            </div>
+                            <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                                Warden — OS-Level Sandboxing for AI Code
+                            </h3>
+                            <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                                OS-level kernel sandboxing and execution containment system designed to isolate untrusted AI-generated code. Enforces a 5-layer isolation boundary (seccomp-bpf syscall filter, PID/NET namespaces, cgroups v2 resource ceilings, read-only OverlayFS scratchpads). Features a Zero Data Leakage (DLP) shield with real-time secret sanitization, DNS tunneling interception, 3-pass DoD 5220.22-M memory zeroing, and complete PostgreSQL audit logging.
+                            </p>
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded font-mono-code text-xs text-gray-300">Linux Kernel</span>
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded font-mono-code text-xs text-gray-300">Seccomp-BPF</span>
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded font-mono-code text-xs text-gray-300">Node.js</span>
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded font-mono-code text-xs text-gray-300">PostgreSQL</span>
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded font-mono-code text-xs text-gray-300">DLP Shield</span>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-4 flex flex-col justify-between h-full space-y-6 lg:border-l lg:border-white/10 lg:pl-8">
+                            <div class="space-y-3 font-mono-code text-xs text-gray-400">
+                                <div><span class="text-gray-600 block">STARTUP TIME</span> ~38ms Ephemeral Spawn</div>
+                                <div><span class="text-gray-600 block">EGRESS POLICY</span> Default-Deny Drop Filter</div>
+                                <div><span class="text-gray-600 block">DATA ENGINE</span> PostgreSQL Audit Schema</div>
+                            </div>
+                            <div class="pt-4 flex items-center gap-3">
+                                <a href="https://github.com/laksh1357/OS_REPOSITORY.git" target="_blank" rel="noopener noreferrer" class="w-full py-3 text-center rounded-lg bg-cyan-400 hover:bg-cyan-300 text-black font-mono-code text-xs font-bold transition-all flex items-center justify-center gap-2">
+                                    <i class="fa-brands fa-github"></i>
+                                    <span>view_source()</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Sudarshan Compiler -->
+                <div class="project-item spec-card rounded-2xl p-8 lg:p-10 border border-white/10" data-category="compilers">
+                    <div class="grid lg:grid-cols-12 gap-8 items-start">
+                        <div class="lg:col-span-8 space-y-4">
+                            <div class="flex items-center gap-3">
+                                <span class="px-2.5 py-1 rounded bg-purple-500/10 border border-purple-500/30 text-purple-400 font-mono-code text-[11px] font-bold">COMPILER CONSTRUCTION</span>
+                                <span class="text-gray-500 font-mono-code text-xs">python 3 / zero-dependency</span>
+                            </div>
+                            <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                                Sudarshan — End-to-End Compiler & Virtual Machine
+                            </h3>
+                            <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                                Complete 5-phase compiler pipeline for an imperative language built strictly with Python 3 standard library. Implements character tokenization with line/column tracking, top-down LL(1) recursive descent parsing, scoped symbol tables with variable shadowing, and Three-Address Code (TAC) quadruple generation. Includes a multi-pass optimizer (constant folding, constant propagation, dead code elimination) and a linear TAC Virtual Machine with complete runtime safety checks.
+                            </p>
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded font-mono-code text-xs text-gray-300">Recursive Descent</span>
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded font-mono-code text-xs text-gray-300">AST Hierarchy</span>
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded font-mono-code text-xs text-gray-300">TAC Quadruples</span>
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded font-mono-code text-xs text-gray-300">Constant Folding</span>
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded font-mono-code text-xs text-gray-300">Virtual Machine</span>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-4 flex flex-col justify-between h-full space-y-6 lg:border-l lg:border-white/10 lg:pl-8">
+                            <div class="space-y-3 font-mono-code text-xs text-gray-400">
+                                <div><span class="text-gray-600 block">PIPELINE PHASES</span> 5 Modular Compiler Passes</div>
+                                <div><span class="text-gray-600 block">OPTIMIZATIONS</span> Multi-pass Constant Fold + DCE</div>
+                                <div><span class="text-gray-600 block">TEST COVERAGE</span> 22/22 Unittest Suite (0.001s)</div>
+                            </div>
+                            <div class="pt-4 flex items-center gap-3">
+                                <a href="https://github.com/laksh1357/MyOWN_Compiler.git" target="_blank" rel="noopener noreferrer" class="w-full py-3 text-center rounded-lg bg-cyan-400 hover:bg-cyan-300 text-black font-mono-code text-xs font-bold transition-all flex items-center justify-center gap-2">
+                                    <i class="fa-brands fa-github"></i>
+                                    <span>view_source()</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Enterprise RAG -->
+                <div class="project-item spec-card rounded-2xl p-8 lg:p-10 border border-white/10" data-category="ai">
+                    <div class="grid lg:grid-cols-12 gap-8 items-start">
+                        <div class="lg:col-span-8 space-y-4">
+                            <div class="flex items-center gap-3">
+                                <span class="px-2.5 py-1 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-mono-code text-[11px] font-bold">DISTRIBUTED SEARCH</span>
+                                <span class="text-gray-500 font-mono-code text-xs">fastapi / docker / kubernetes</span>
+                            </div>
+                            <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                                Enterprise RAG System
+                            </h3>
+                            <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                                Production-ready Retrieval Augmented Generation scaffold engineered with FastAPI. Features hybrid document retrieval combining BM25 sparse keyword matching with dense vector search, normalized via Reciprocal Rank Fusion (RRF). Configured with cross-encoder reranker interfaces, tenant-isolated cache keys, document ingestion with sliding-window chunking, evaluation harnesses (faithfulness & groundedness), and Docker/K8s deployment manifests.
+                            </p>
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded font-mono-code text-xs text-gray-300">FastAPI</span>
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded font-mono-code text-xs text-gray-300">Hybrid BM25</span>
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded font-mono-code text-xs text-gray-300">RRF Scoring</span>
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded font-mono-code text-xs text-gray-300">Cross-Encoders</span>
+                                <span class="px-2.5 py-1 bg-white/[0.03] border border-white/10 rounded font-mono-code text-xs text-gray-300">Docker & K8s</span>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-4 flex flex-col justify-between h-full space-y-6 lg:border-l lg:border-white/10 lg:pl-8">
+                            <div class="space-y-3 font-mono-code text-xs text-gray-400">
+                                <div><span class="text-gray-600 block">SEARCH METHOD</span> Hybrid Dense + BM25 Fusion</div>
+                                <div><span class="text-gray-600 block">SECURITY</span> X-API-Key Guard + Rate Limiter</div>
+                                <div><span class="text-gray-600 block">DEPLOYMENT</span> Compose & K8s Manifests</div>
+                            </div>
+                            <div class="pt-4 flex items-center gap-3">
+                                <a href="https://github.com/laksh1357/AI_PROJECT.git" target="_blank" rel="noopener noreferrer" class="w-full py-3 text-center rounded-lg bg-cyan-400 hover:bg-cyan-300 text-black font-mono-code text-xs font-bold transition-all flex items-center justify-center gap-2">
+                                    <i class="fa-brands fa-github"></i>
+                                    <span>view_source()</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secondary Projects Grid -->
+                <div class="grid md:grid-cols-3 gap-6 pt-4">
+
+                    <div class="project-item spec-card rounded-xl p-7 flex flex-col justify-between" data-category="systems">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-mono-code text-cyan-400">NETWORKING</span>
+                                <a href="https://github.com/laksh1357/NetworkMonitoring_DeviceDiscovery_Tool.git" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                            </div>
+                            <h4 class="text-lg font-bold text-white">LAN Watchtower</h4>
+                            <p class="text-gray-400 text-xs leading-relaxed">
+                                Desktop network telemetry scanner with CustomTkinter. Multi-threaded ARP/ICMP sweeps, targeted TCP port inspection (FTP, SSH, HTTP, SMB), SQLite WAL history logging, and native desktop notifications for newly connected hosts.
+                            </p>
+                        </div>
+                        <div class="pt-6">
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="px-2 py-0.5 bg-white/5 rounded text-[10px] font-mono-code text-gray-300">Python</span>
+                                <span class="px-2 py-0.5 bg-white/5 rounded text-[10px] font-mono-code text-gray-300">CustomTkinter</span>
+                                <span class="px-2 py-0.5 bg-white/5 rounded text-[10px] font-mono-code text-gray-300">Scapy</span>
+                                <span class="px-2 py-0.5 bg-white/5 rounded text-[10px] font-mono-code text-gray-300">SQLite</span>
+                            </div>
+                            <a href="https://github.com/laksh1357/NetworkMonitoring_DeviceDiscovery_Tool.git" target="_blank" rel="noopener noreferrer" class="block w-full py-2.5 text-center rounded border border-white/10 hover:border-cyan-500 font-mono-code text-xs text-gray-300 hover:text-white transition-all">
+                                inspect_repo
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="project-item spec-card rounded-xl p-7 flex flex-col justify-between" data-category="demos">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-mono-code text-cyan-400">ENGINEERING DEMO</span>
+                                <div class="flex items-center gap-2">
+                                    <a href="https://github.com/laksh1357/SnakeGame.git" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                                    <a href="https://laksh1357.github.io/SnakeGame/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>
+                                </div>
+                            </div>
+                            <h4 class="text-lg font-bold text-white">Classic Snake Game</h4>
+                            <p class="text-gray-400 text-xs leading-relaxed">
+                                Canvas-rendered retro snake simulator written in vanilla JavaScript. Features delta-time based velocity stepping, grid coordinate mathematical collision detection, high-score session caching, and zero dependencies.
+                            </p>
+                        </div>
+                        <div class="pt-6">
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="px-2 py-0.5 bg-white/5 rounded text-[10px] font-mono-code text-gray-300">JavaScript</span>
+                                <span class="px-2 py-0.5 bg-white/5 rounded text-[10px] font-mono-code text-gray-300">HTML5 Canvas</span>
+                                <span class="px-2 py-0.5 bg-white/5 rounded text-[10px] font-mono-code text-gray-300">CSS3</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 font-mono-code text-xs">
+                                <a href="https://github.com/laksh1357/SnakeGame.git" target="_blank" rel="noopener noreferrer" class="py-2.5 text-center rounded border border-white/10 hover:border-cyan-500 text-gray-300 hover:text-white transition-all">source</a>
+                                <a href="https://laksh1357.github.io/SnakeGame/" target="_blank" rel="noopener noreferrer" class="py-2.5 text-center rounded bg-white/5 hover:bg-white/10 text-cyan-400 transition-all">live_demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-item spec-card rounded-xl p-7 flex flex-col justify-between" data-category="demos">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-mono-code text-cyan-400">ENGINEERING DEMO</span>
+                                <div class="flex items-center gap-2">
+                                    <a href="https://github.com/laksh1357/TicTacToeGame.git" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                                    <a href="https://laksh1357.github.io/TicTacToeGame/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>
+                                </div>
+                            </div>
+                            <h4 class="text-lg font-bold text-white">Tic Tac Toe Game</h4>
+                            <p class="text-gray-400 text-xs leading-relaxed">
+                                Responsive browser-based board logic evaluator. Features turn-based state management, array bitmask winner evaluations for 8 possible grid combinations, and instant DOM reconciliation on game state reset.
+                            </p>
+                        </div>
+                        <div class="pt-6">
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="px-2 py-0.5 bg-white/5 rounded text-[10px] font-mono-code text-gray-300">JavaScript</span>
+                                <span class="px-2 py-0.5 bg-white/5 rounded text-[10px] font-mono-code text-gray-300">DOM Logic</span>
+                                <span class="px-2 py-0.5 bg-white/5 rounded text-[10px] font-mono-code text-gray-300">CSS3</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 font-mono-code text-xs">
+                                <a href="https://github.com/laksh1357/TicTacToeGame.git" target="_blank" rel="noopener noreferrer" class="py-2.5 text-center rounded border border-white/10 hover:border-cyan-500 text-gray-300 hover:text-white transition-all">source</a>
+                                <a href="https://laksh1357.github.io/TicTacToeGame/" target="_blank" rel="noopener noreferrer" class="py-2.5 text-center rounded bg-white/5 hover:bg-white/10 text-cyan-400 transition-all">live_demo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Track -->
+        <section id="education" class="py-24 px-6 max-w-7xl mx-auto border-t border-white/[0.08] fade-in-up">
+            <div class="mb-14">
+                <span class="text-xs font-mono-code text-cyan-400 uppercase tracking-widest">05. Credentials</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Academic Timeline</h2>
+            </div>
+
+            <div class="space-y-6 max-w-4xl">
+                <div class="spec-card p-8 rounded-2xl border-l-4 border-cyan-400 relative">
+                    <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
+                        <div>
+                            <span class="text-xs font-mono-code text-cyan-400 uppercase">Undergraduate Degree • 2024 - 2028</span>
+                            <h3 class="text-xl font-bold text-white mt-1">Bachelor of Technology in Computer Science and Engineering</h3>
+                            <p class="text-gray-400 text-sm mt-0.5">Specialization in Data Science • Vellore Institute of Technology (VIT Vellore)</p>
+                        </div>
+                        <span class="px-3 py-1 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 text-xs font-mono-code font-bold self-start">
+                            Currently Studying
+                        </span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 pt-6 mt-6 border-t border-white/5 font-mono-code text-center">
+                        <div>
+                            <span class="text-xl font-black text-cyan-400">9.52</span>
+                            <span class="text-[10px] text-gray-500 block uppercase mt-1">Cumulative CGPA</span>
+                        </div>
+                        <div>
+                            <span class="text-xl font-black text-white">Dean's List</span>
+                            <span class="text-[10px] text-gray-500 block uppercase mt-1">Academic Rank</span>
+                        </div>
+                        <div>
+                            <span class="text-xl font-black text-white">3rd Year</span>
+                            <span class="text-[10px] text-gray-500 block uppercase mt-1">Academic Phase</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spec-card p-8 rounded-2xl relative">
+                    <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
+                        <div>
+                            <span class="text-xs font-mono-code text-gray-500 uppercase">Senior Secondary Education</span>
+                            <h3 class="text-xl font-bold text-white mt-1">Higher Secondary Certificate (Class XII)</h3>
+                            <p class="text-gray-400 text-sm mt-0.5">Science Discipline (Physics, Chemistry, Mathematics) • St. Xavier's School, Lucknow</p>
+                        </div>
+                        <span class="px-3 py-1 rounded bg-white/5 text-gray-400 border border-white/10 text-xs font-mono-code self-start">
+                            Completed
+                        </span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 pt-6 mt-6 border-t border-white/5 font-mono-code text-center">
+                        <div>
+                            <span class="text-xl font-black text-gray-200">83.75%</span>
+                            <span class="text-[10px] text-gray-500 block uppercase mt-1">Final Score</span>
+                        </div>
+                        <div>
+                            <span class="text-xl font-black text-gray-200">PCM</span>
+                            <span class="text-[10px] text-gray-500 block uppercase mt-1">Curriculum</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements & Training Section -->
+        <section id="achievements" class="py-24 px-6 max-w-7xl mx-auto border-t border-white/[0.08] fade-in-up">
+            <div class="mb-14">
+                <span class="text-xs font-mono-code text-cyan-400 uppercase tracking-widest">06. Validation</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Achievements & Certifications</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="spec-card p-7 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl mb-6">
+                            <i class="fa-brands fa-microsoft"></i>
+                        </div>
+                        <span class="text-[10px] font-mono-code text-gray-500 uppercase tracking-widest">HACKATHON</span>
+                        <h4 class="text-lg font-bold text-white mt-1 mb-2">Microsoft Workshop & Hackathon</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">
+                            Participant & Technical Contributor. Engaged in technical prototyping and applied architecture problem solving.
+                        </p>
+                    </div>
+                    <span class="text-[11px] font-mono-code text-cyan-400 mt-6 pt-4 border-t border-white/5">Verified Participant</span>
+                </div>
+
+                <div class="spec-card p-7 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl mb-6">
+                            <i class="fa-solid fa-code-branch"></i>
+                        </div>
+                        <span class="text-[10px] font-mono-code text-gray-500 uppercase tracking-widest">HACKATHON</span>
+                        <h4 class="text-lg font-bold text-white mt-1 mb-2">VIT Code to Innovate</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">
+                            Participant & Technical Contributor. Collaborated in developing rapid software solutions addressing real-world problem statements.
+                        </p>
+                    </div>
+                    <span class="text-[11px] font-mono-code text-cyan-400 mt-6 pt-4 border-t border-white/5">Verified Participant</span>
+                </div>
+
+                <div class="spec-card p-7 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl mb-6">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <span class="text-[10px] font-mono-code text-gray-500 uppercase tracking-widest">FOUNDATIONS</span>
+                        <h4 class="text-lg font-bold text-white mt-1 mb-2">Coursework & Training</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">
+                            Comprehensive mastery of C, C++, Data Structures & Algorithms. Rigorous instruction in memory models and algorithmic optimization.
+                        </p>
+                    </div>
+                    <span class="text-[11px] font-mono-code text-cyan-400 mt-6 pt-4 border-t border-white/5">Instructor: Abdul Bari</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Communication / Contact Interface -->
+        <section id="contact" class="py-24 px-6 max-w-7xl mx-auto border-t border-white/[0.08] fade-in-up">
+            <div class="mb-14">
+                <span class="text-xs font-mono-code text-cyan-400 uppercase tracking-widest">07. Real-Time Endpoints</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Establish Direct Transmission</h2>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-5 space-y-6">
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Send a verified payload directly through this interface. Form submissions are piped straight to my primary communication daemon with zero middlemen.
+                    </p>
+
+                    <div class="space-y-4 font-mono-code text-xs">
+                        <div class="p-4 rounded-xl bg-white/[0.02] border border-white/10 flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-base">
+                                <i class="fa-regular fa-envelope"></i>
+                            </div>
+                            <div>
+                                <span class="text-gray-500 block text-[10px] uppercase">DIRECT DISPATCH</span>
+                                <a href="mailto:singhlakshya7777@gmail.com" class="text-white hover:text-cyan-400 transition-colors font-semibold">
+                                    singhlakshya7777@gmail.com
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-white/[0.02] border border-white/10 flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-base">
+                                <i class="fa-solid fa-code"></i>
+                            </div>
+                            <div>
+                                <span class="text-gray-500 block text-[10px] uppercase">LEETCODE DISPATCH</span>
+                                <a href="https://leetcode.com/u/lakshya_03_/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-cyan-400 transition-colors font-semibold">
+                                    leetcode.com/u/lakshya_03_
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-white/[0.02] border border-white/10 flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-base">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <span class="text-gray-500 block text-[10px] uppercase">COORDINATES</span>
+                                <span class="text-white font-semibold">VIT Vellore, Tamil Nadu, India</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4">
+                        <span class="text-xs font-mono-code text-gray-500 block mb-3">// VERIFIED PROFILES</span>
+                        <div class="flex gap-3">
+                            <a href="https://github.com/laksh1357" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-lg bg-white/[0.03] border border-white/10 hover:border-cyan-400 hover:text-cyan-400 flex items-center justify-center text-gray-400 transition-all" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://leetcode.com/u/lakshya_03_/" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-lg bg-white/[0.03] border border-white/10 hover:border-cyan-400 hover:text-cyan-400 flex items-center justify-center text-gray-400 transition-all" title="LeetCode Profile"><i class="fa-solid fa-code"></i></a>
+                            <a href="https://www.linkedin.com/in/lakshya-singh-579175277" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-lg bg-white/[0.03] border border-white/10 hover:border-cyan-400 hover:text-cyan-400 flex items-center justify-center text-gray-400 transition-all" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="mailto:singhlakshya7777@gmail.com" class="w-11 h-11 rounded-lg bg-white/[0.03] border border-white/10 hover:border-cyan-400 hover:text-cyan-400 flex items-center justify-center text-gray-400 transition-all" title="Email"><i class="fa-regular fa-envelope"></i></a>
+                            <a href="https://www.instagram.com/laksh.ya_03_" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-lg bg-white/[0.03] border border-white/10 hover:border-cyan-400 hover:text-cyan-400 flex items-center justify-center text-gray-400 transition-all" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REAL WORKING FORM (Formspree + Native Client Fallback) -->
+                <div class="lg:col-span-7">
+                    <form id="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" class="spec-card p-8 sm:p-10 rounded-2xl border border-white/10 space-y-6">
+                        <div class="grid sm:grid-cols-2 gap-6 font-mono-code text-xs">
+                            <div class="space-y-2">
+                                <label for="sender-name" class="text-gray-400 uppercase tracking-wider block">Sender Identifier *</label>
+                                <input type="text" name="name" id="sender-name" required placeholder="name / handle" class="w-full bg-[#08090d] border border-white/10 focus:border-cyan-400 p-3.5 rounded-lg outline-none text-white transition-all">
+                            </div>
+                            <div class="space-y-2">
+                                <label for="sender-email" class="text-gray-400 uppercase tracking-wider block">Return Address *</label>
+                                <input type="email" name="_replyto" id="sender-email" required placeholder="user@domain.com" class="w-full bg-[#08090d] border border-white/10 focus:border-cyan-400 p-3.5 rounded-lg outline-none text-white transition-all">
+                            </div>
+                        </div>
+                        <div class="space-y-2 font-mono-code text-xs">
+                            <label for="message-subject" class="text-gray-400 uppercase tracking-wider block">Topic Specification *</label>
+                            <input type="text" name="_subject" id="message-subject" required placeholder="e.g. Systems SWE Role / Compiler Exploration" class="w-full bg-[#08090d] border border-white/10 focus:border-cyan-400 p-3.5 rounded-lg outline-none text-white transition-all">
+                        </div>
+                        <div class="space-y-2 font-mono-code text-xs">
+                            <label for="message-body" class="text-gray-400 uppercase tracking-wider block">Payload Message *</label>
+                            <textarea name="message" id="message-body" rows="5" required placeholder="Type transmission..." class="w-full bg-[#08090d] border border-white/10 focus:border-cyan-400 p-3.5 rounded-lg outline-none text-white transition-all font-sans text-sm"></textarea>
+                        </div>
+                        <button type="submit" id="submit-btn" class="w-full py-4 rounded-lg bg-cyan-400 hover:bg-cyan-300 text-black font-mono-code font-bold text-xs transition-all shadow-[0_0_20px_rgba(0,242,254,0.25)] flex items-center justify-center gap-2">
+                            <span>dispatch_payload()</span>
+                            <i class="fa-solid fa-paper-plane text-[10px]"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Structural Footer -->
+    <footer class="py-12 border-t border-white/[0.08] text-center font-mono-code text-xs text-gray-500">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="text-left">
+                <span class="text-sm font-bold text-white block">Lakshya Singh</span>
+                <span class="text-[11px] text-gray-600">Deterministic Systems & Compiler Toolchains</span>
+            </div>
+            <div class="flex gap-6 text-[11px]">
+                <a href="https://leetcode.com/u/lakshya_03_/" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition-colors">// leetcode</a>
+                <a href="#projects" class="hover:text-cyan-400 transition-colors">// projects</a>
+                <a href="#contact" class="hover:text-cyan-400 transition-colors">// contact</a>
+                <a href="https://github.com/laksh1357" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition-colors">// github</a>
+            </div>
+        </div>
+        <div class="mt-8 text-[10px] text-gray-600">
+            SYSTEM KERNEL // 2026 REVISION • LAKSHYA SINGH
+        </div>
+    </footer>
+
+    <!-- Toast Notification Container -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-[#0e1017] border border-cyan-500/40 text-cyan-300 px-5 py-3 rounded-xl shadow-[0_10px_30px_rgba(0,242,254,0.2)] font-mono-code text-xs flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-cyan-400 text-sm"></i>
+            <span id="toast-message">Email address copied to clipboard!</span>
+        </div>
+    </div>
+
+    <!-- Client-Side Utilities -->
+    <script>
+        // Navigation Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Toast Notification System
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+
+        function copyEmailToClipboard() {
+            navigator.clipboard.writeText('singhlakshya7777@gmail.com').then(() => {
+                showToast('Email copied: singhlakshya7777@gmail.com');
+            }).catch(() => {
+                showToast('Email: singhlakshya7777@gmail.com');
+            });
+        }
+
+        // Project Category Filter
+        function filterProjects(category) {
+            const items = document.querySelectorAll('.project-item');
+            const filterBtns = document.querySelectorAll('.proj-filter-btn');
+
+            filterBtns.forEach(btn => {
+                btn.classList.remove('bg-cyan-400', 'text-black', 'font-bold', 'border-cyan-400');
+                btn.classList.add('bg-white/5', 'text-gray-400', 'border-white/10');
+            });
+
+            event.target.classList.remove('bg-white/5', 'text-gray-400', 'border-white/10');
+            event.target.classList.add('bg-cyan-400', 'text-black', 'font-bold', 'border-cyan-400');
+
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = '';
+                    item.classList.add('fade-in-up', 'active');
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Dual-Engine Contact Dispatch (Formspree API with direct mailto fallback)
+        const contactForm = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span>transmitting_packet...</span> <i class="fa-solid fa-spinner animate-spin"></i>';
+            submitBtn.disabled = true;
+
+            const endpoint = contactForm.getAttribute('action');
+            const hasRealFormspree = endpoint && !endpoint.includes('YOUR_FORMSPREE_ID');
+
+            if (hasRealFormspree) {
+                try {
+                    const formData = new FormData(contactForm);
+                    const response = await fetch(endpoint, {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (response.ok) {
+                        showToast('Transmission Successful: Your message has been sent!');
+                        contactForm.reset();
+                    } else {
+                        throw new Error('Endpoint returned error status');
+                    }
+                } catch (err) {
+                    showToast('Rerouting transmission through default email client...');
+                    triggerMailtoFallback();
+                }
+            } else {
+                triggerMailtoFallback();
+            }
+
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        });
+
+        function triggerMailtoFallback() {
+            const name = document.getElementById('sender-name').value;
+            const email = document.getElementById('sender-email').value;
+            const subject = document.getElementById('message-subject').value;
+            const body = document.getElementById('message-body').value;
+
+            const mailtoUrl = `mailto:singhlakshya7777@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("Sender: " + name + " (" + email + ")\n\n" + body)}`;
+            window.location.href = mailtoUrl;
+        }
+
+        // Interactive Terminal CLI Logic
+        const termInput = document.getElementById('terminal-input');
+        const termOutput = document.getElementById('terminal-output');
+
+        if (termInput) {
+            termInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    const cmd = termInput.value.trim();
+                    if (cmd) {
+                        runTermCommand(cmd);
+                        termInput.value = '';
+                    }
+                }
+            });
+        }
+
+        function clearTerminalLogs() {
+            termOutput.innerHTML = '';
+        }
+
+        function runTermCommand(cmd) {
+            const cmdDiv = document.createElement('div');
+            cmdDiv.className = 'pt-2';
+            cmdDiv.innerHTML = `<span class="text-cyan-400">root@node01:~$</span> ${escapeHtml(cmd)}`;
+            termOutput.appendChild(cmdDiv);
+
+            const resDiv = document.createElement('div');
+            resDiv.className = 'text-gray-400 pl-2 border-l border-white/10 space-y-1 my-1';
+
+            const cleanCmd = cmd.toLowerCase().trim();
+
+            if (cleanCmd === 'help') {
+                resDiv.innerHTML = `
+                    <p class="text-cyan-300 font-bold">AVAILABLE DAEMON COMMANDS:</p>
+                    <p><span class="text-cyan-400">cat /proc/sys/kernel/identity</span> — Output engineer metadata</p>
+                    <p><span class="text-cyan-400">check-subsystems</span> — Verify active projects & test suites</p>
+                    <p><span class="text-cyan-400">ls projects</span> — List featured repositories</p>
+                    <p><span class="text-cyan-400">fetch leetcode</span> — Print problem solving status</p>
+                    <p><span class="text-cyan-400">contact</span> — Scroll directly to transmission endpoints</p>
+                    <p><span class="text-cyan-400">clear</span> — Wipe terminal output window</p>
+                `;
+            } else if (cleanCmd.includes('identity') || cleanCmd === 'about') {
+                resDiv.innerHTML = `
+                    <p><span class="text-gray-500">NAME:</span> Lakshya Singh</p>
+                    <p><span class="text-gray-500">DEPT:</span> CSE (Data Science) @ VIT Vellore</p>
+                    <p><span class="text-gray-500">CGPA:</span> 9.52 (Dean's List Equivalent)</p>
+                    <p><span class="text-gray-500">STATUS:</span> 3rd Year • Seeking Systems & Compilers Engineering Roles</p>
+                `;
+            } else if (cleanCmd.includes('subsystems')) {
+                resDiv.innerHTML = `
+                    <p class="text-emerald-400">✓ seccomp_bpf: 5-layer isolation active (Warden)</p>
+                    <p class="text-emerald-400">✓ sudarshan_vm: 22/22 unit tests passed (Compiler)</p>
+                    <p class="text-emerald-400">✓ rag_pipeline: BM25 + dense hybrid ready (FastAPI)</p>
+                    <p class="text-emerald-400">✓ lan_scanner: socket daemon listener ok (CustomTkinter)</p>
+                `;
+            } else if (cleanCmd.includes('projects') || cleanCmd === 'ls') {
+                resDiv.innerHTML = `
+                    <p class="text-cyan-300 font-bold">FEATURED REPOSITORIES:</p>
+                    <p>1. <span class="text-white font-semibold">Warden</span> [OS Kernel Sandbox / Seccomp-BPF / Node / Postgres]</p>
+                    <p>2. <span class="text-white font-semibold">Sudarshan Compiler</span> [LL(1) Recursive Descent / TAC / VM / Python]</p>
+                    <p>3. <span class="text-white font-semibold">Enterprise RAG</span> [FastAPI / BM25 / Vector Hybrid RRF / K8s]</p>
+                    <p>4. <span class="text-white font-semibold">LAN Watchtower</span> [Network Telemetry / Scapy / CustomTkinter / SQLite]</p>
+                `;
+            } else if (cleanCmd.includes('leetcode')) {
+                resDiv.innerHTML = `
+                    <p><span class="text-amber-400">HANDLE:</span> @lakshya_03_</p>
+                    <p><span class="text-gray-400">PROFILE LINK:</span> https://leetcode.com/u/lakshya_03_/</p>
+                    <p><span class="text-gray-400">CORE FOCUS:</span> Dynamic Programming, Trees & Graphs, Systems DSA</p>
+                `;
+            } else if (cleanCmd === 'contact') {
+                resDiv.innerHTML = `<p class="text-cyan-300">Jumping to #contact section...</p>`;
+                window.location.hash = '#contact';
+            } else if (cleanCmd === 'clear') {
+                clearTerminalLogs();
+                return;
+            } else {
+                resDiv.innerHTML = `<p class="text-red-400">bash: command not found: ${escapeHtml(cmd)}. Type 'help' for options.</p>`;
+            }
+
+            termOutput.appendChild(resDiv);
+            termOutput.scrollTop = termOutput.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Hardware-accelerated intersection observer reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+        // Active Navigation Highlight (ScrollSpy)
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('#desktop-nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active-nav', 'text-cyan-400');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active-nav', 'text-cyan-400');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
